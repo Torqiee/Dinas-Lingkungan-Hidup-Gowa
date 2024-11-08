@@ -114,8 +114,10 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($dokumentasi as $key => $doc)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="3500">
-                                <img src="{{ url('images/'.$doc->image_doc) }}" class="d-block w-100 border border-4 border-success rounded-3" alt="...">
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" data-bs-interval="3500
+                                <div class="aspect-ratio-16x9">
+                                    <img src="{{ url('images/'.$doc->image_doc) }}" class="d-block w-100 border border-4 border-success rounded-3" alt="...">
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -168,6 +170,22 @@
   to {
     transform: translateX(-100%);
   }
+}
+
+.aspect-ratio-16x9 {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden; /* Ensures no overflow outside the container */
+}
+
+.aspect-ratio-16x9 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the container without distortion */
 }
 
 .logos {

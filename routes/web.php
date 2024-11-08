@@ -14,6 +14,8 @@ use App\Http\Controllers\ProgramKerjaController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\DocumentationController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,10 @@ use App\Http\Controllers\DocumentationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('categories/{id}/export', [CategoryController::class, 'exportSingleCategory'])->name('categories.exportSingle');
+Route::get('/categories/download', [CategoryController::class, 'downloadAllCategories'])->name('categories.download');
+
 
 Route::group(['middleware' => ['role:Admin|Sekretariat|Pemrakarsa']], function() {
     Route::get('/dashboard', function () {

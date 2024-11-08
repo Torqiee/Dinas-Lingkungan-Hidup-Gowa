@@ -20,6 +20,9 @@ class PihakController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'image_pihak' => 'required'
+        ]);
         $imageName = time().'.'.$request->image_pihak->extension();
         $request->image_pihak->move(public_path('images'), $imageName);
 

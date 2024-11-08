@@ -145,6 +145,7 @@
                     <hr class="border-3" style="border-color: #315A39">
 
                     <div class="card border-4">
+                        @can('update permission')
                         <div class="p-3">
                             <form action="{{ url('categories/'.$kegiatan->id.'/upload-data-kegiatan') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -162,8 +163,9 @@
                         </div>
 
                         <hr class="border-3 mx-3" style="border-color: #315A39">
+                        @endcan
 
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center mt-3">
                             <h4 class="fw-semibold ms-3 me-3 pt-2">List Data Perusahaan</h4>
                             <form action="" class="d-flex flex-row ms-auto me-3">
                                 <input class="form-control" style="border-color: #33363F; border-width: 3px" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ $search }}" />

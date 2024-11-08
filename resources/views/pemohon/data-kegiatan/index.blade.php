@@ -139,9 +139,10 @@
                     <div class="card rounded-4 border-3">
                         <div class="d-flex align-items-center pt-3">
                             {{-- <h4 class="fw-semibold ms-3 me-3 pt-2">List Data Kegiatan</h4> --}}
-                            <a href="{{ route('categories.create', ['kegiatanId' => $kegiatan->id]) }}" type="button" class="col-4 btn rounded-2 px-3 fw-semibold ms-3 d-none d-lg-block" style="background-color: #315A39; color: #F5F5F5;">Tambah Data Kegiatan +</a>
-                            <a href="{{ route('categories.create', ['kegiatanId' => $kegiatan->id]) }}" type="button" class="col-4 btn rounded-2 px-3 fw-semibold ms-3 d-block d-lg-none me-4" style="background-color: #315A39; color: #F5F5F5;">Data +</a>
-
+                            @can('update permission')
+                                <a href="{{ route('categories.create', ['kegiatanId' => $kegiatan->id]) }}" type="button" class="col-4 btn rounded-2 px-3 fw-semibold ms-3 d-none d-lg-block" style="background-color: #315A39; color: #F5F5F5;">Tambah Data Kegiatan +</a>
+                                <a href="{{ route('categories.create', ['kegiatanId' => $kegiatan->id]) }}" type="button" class="col-4 btn rounded-2 px-3 fw-semibold ms-3 d-block d-lg-none me-4" style="background-color: #315A39; color: #F5F5F5;">Data +</a>
+                            @endcan
                             <form action="" class="d-flex flex-row ms-auto me-3">
                                 <input class="form-control" style="border-color: #33363F; border-width: 3px" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ $search }}" />
                                 <button class="btn d-none d-md-block ms-1 border-3" type="submit" style="background-color: #315A39; color: #F5F5F5;">Search</button>

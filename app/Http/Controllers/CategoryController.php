@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\DataFile;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -112,4 +113,42 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('status', 'Comment added successfully');
     }
+
+    public function exportPDF($id)
+    {
+        // Fetch the specific category by ID
+        $category = Category::findOrFail($id);
+
+        // Generate the PDF from a view
+        $pdf = Pdf::loadView('pdf.category', compact('category'));
+
+        // Return the PDF for download
+        return $pdf->download('category-' . $category->id . '.pdf');
+    }
+
+    public function exportSingleCategory($id)
+    {
+        // Fetch the category by ID
+        $category = Category::findOrFail($id);
+
+        // Generate the PDF from the view
+        $pdf = Pdf::loadView('pdf.category', compact('category'));
+
+        // Return the generated PDF as a download
+        return $pdf->download('category_'.$category->id.'.pdf');
+    }
+
+    public function downloadAllCategories()
+    {
+        // Fetch all categories
+        $categories = Category::all();
+
+        // Generate the PDF from a view and pass the categories to the view
+        $pdf = Pdf::loadView('pdf.categories', compact('categories'))
+                  ->setPaper('a4', 'landscape'); // Set paper size to A4 and orientation to landscape
+
+        // Return the PDF for download
+        return $pdf->download('all_categories.pdf');
+    }
+
 }

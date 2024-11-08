@@ -56,8 +56,14 @@
                 <div class="container p-3 rounded-4" style="background-color: #eee">
                     <div class="d-flex align-items-center">
                         @can('create data perusahaan')
-                            <a href="{{ url('categories/create') }}" type="button" class="col-4 btn rounded-3 px-3 fw-semibold d-none d-lg-block" style="background-color: #315A39; color: #F5F5F5;">Tambah Data Perusahaan +</a>
-                            <a href="{{ url('categories/create') }}" type="button" class="col-4 btn rounded-3 px-3 fw-semibold d-block d-lg-none me-4" style="background-color: #315A39; color: #F5F5F5;">Data +</a>
+                            <a href="{{ url('categories/create') }}" type="button" class="col-4 btn rounded-3 px-2 fw-semibold d-none d-lg-block" style="background-color: #315A39; color: #F5F5F5;">Tambah Data Perusahaan +</a>
+                            <a href="{{ url('categories/create') }}" type="button" class="col-4 btn rounded-3 px-2 fw-semibold d-block d-lg-none" style="background-color: #315A39; color: #F5F5F5;">Data +</a>
+                            <a href="{{ route('categories.download') }}" class="col-4 btn rounded-3 px-2 fw-semibold d-block d-lg-none ms-2 me-2" style="background-color: #315A39; color: #F5F5F5;">
+                                Export as PDF
+                            </a>
+                            <a href="{{ route('categories.download') }}" class="col-4 btn rounded-3 px-2 fw-semibold d-none d-lg-block ms-2 me-2" style="background-color: #315A39; color: #F5F5F5;">
+                                Download All Data as PDF
+                            </a>
                         @endcan
                         <form action="" class="d-flex ms-auto">
                             <input class="form-control" style="border-color: #33363F; border-width: 3px" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ $search }}" />
@@ -66,6 +72,7 @@
                     </div>
 
                     <hr class="border-3 border-success" style="border-color: #315A39">
+
                         <div class="card-body table-responsive">
                             <table class="table table-bordered table-striped align-middle">
                                 <thead class="border-3">
@@ -81,6 +88,7 @@
                                         @can('edit data perusahaan')
                                             <th class="border-3">Pengaturan</th>
                                         @endcan
+                                        <th>Share</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,7 +98,7 @@
                                         <td>{{ $item->name }}</td>
                                         @can('edit file data perusahaan')
                                             <td>
-                                                <a href="{{ url('categories/'.$item->id.'/kegiatan') }}" class="btn fw-semibold border-3" style="border-color: #33363F;">Buka Data</a>
+                                                <a href="{{ url('categories/'.$item->id.'/kegiatan') }}" class="btn fw-semibold border-3" style="border-color: #33363F;">Open</a>
                                             </td>
                                         @endcan
                                         <td>{{ $item->penanggung_perusahaan }}</td>
@@ -100,6 +108,10 @@
                                                 <a href="#" class="btn fw-semibold border-3" style="border-color: #c30010;" onclick="confirmDelete('{{ $item->id }}')">Hapus</a>
                                             </td>
                                         @endcan
+                                        <!-- Export button for single category -->
+                                        <td>
+                                            <a href="{{ route('categories.exportSingle', $item->id) }}" class="btn btn-success">Export</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
